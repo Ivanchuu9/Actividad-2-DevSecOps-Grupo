@@ -1,0 +1,12 @@
+Plan de pruebas de seguridad para la app to-do
+
+En este archivo dejo documentado el plan de pruebas que aplicaria en la fase de testing del S-SDLC, tal y como explico en el archivo principal.
+
+1. Escaneo de vulnerabilidades del contenedor
+Para esta prueba usaria una herramienta como Trivy. El objetivo es analizar la imagen de Docker que acabo de crear para ver si la version de Node o alguna dependencia tiene algun fallo de seguridad grave antes de subirlo a produccion.
+Comando propuesto: trivy image todo-app
+
+2. Analisis DAST
+Para esto levantaria el contenedor en el puerto 3000 y le pasaria una herramienta como OWASP ZAP. La idea es simular ataques reales contra la web funcionando para comprobar que no me cuelan inyecciones XSS al añadir una tarea nueva y que la aplicacion es robusta.
+
+Con esto quedaria cubierta la fase de pruebas del ciclo de vida seguro.

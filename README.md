@@ -158,6 +158,36 @@ Para obtener resultados visibles, se creó una versión insegura de laboratorio.
 
 Las capturas se encuentran en la carpeta [`evidencias/`](evidencias/), y el informe completo está disponible en [`docs/Asensio_Gonzalez_Jimenez_Martin_Actividad3_Evaluacion_Seguridad.pdf`](docs/Asensio_Gonzalez_Jimenez_Martin_Actividad3_Evaluacion_Seguridad.pdf).
 
+
+### 6.4. Código vulnerable documentado
+
+Además de las evidencias y resultados de herramientas, se incluye una carpeta específica con el **código vulnerable de laboratorio** utilizado para explicar las alteraciones de la Actividad 3 sin modificar la versión principal de la aplicación.
+
+La carpeta es:
+
+```text
+actividad3-codigo-vulnerable/
+```
+
+Esta carpeta contiene una versión aislada y documentada de los cambios inseguros introducidos para provocar alertas y facilitar la revisión académica:
+
+| Archivo | Vulnerabilidad representada | Relación con la evaluación |
+|---|---|---|
+| `actividad3-codigo-vulnerable/Dockerfile` | Imagen `node:20.1.0`, copia amplia con `COPY . .` y ausencia de `USER node`. | Permite justificar alertas de Dependabot, Snyk y revisión de contenedores. |
+| `actividad3-codigo-vulnerable/compose.yaml` | `privileged: true`, MySQL expuesto en `3306:3306` y credenciales débiles. | Permite justificar el resultado de Nmap y los riesgos de configuración. |
+| `actividad3-codigo-vulnerable/backend/src/index.js` | CORS permisivo, secretos hardcodeados, endpoint de debug, `eval()` y errores verbosos. | Permite explicar riesgos de exposición de información, mala configuración e inyección. |
+| `actividad3-codigo-vulnerable/backend/src/routes/addItem.js` | `console.log(req.headers)`, uso de `...req.body` y `child_process.exec()`. | Permite explicar logging inseguro, mass assignment y ejecución de comandos. |
+| `actividad3-codigo-vulnerable/backend/src/persistence/mysql.js` | Consulta SQL construida por concatenación. | Permite explicar riesgo de SQL Injection. |
+
+Las capturas concretas de este código vulnerable se encuentran en:
+
+```text
+evidencias/actividad3-codigo-vulnerable/
+```
+
+Esta carpeta no sustituye a la aplicación principal del repositorio. Su finalidad es dejar documentado el escenario inseguro usado para la evaluación automática de seguridad.
+
+
 ---
 
 ## 7. Estructura del repositorio
@@ -173,13 +203,32 @@ Actividad-2-DevSecOps-Grupo/
 ├── app/
 ├── assets/
 │   └── esquema-sdlc-devsecops.png
+├── actividad3-codigo-vulnerable/
+│   ├── README.md
+│   ├── Dockerfile
+│   ├── compose.yaml
+│   ├── backend/
+│   │   └── src/
+│   │       ├── index.js
+│   │       ├── routes/
+│   │       │   └── addItem.js
+│   │       └── persistence/
+│   │           └── mysql.js
+│   └── client/
+│       └── README.md
 ├── docs/
 │   ├── Asensio_Gonzalez_Jimenez_Martin_Actividad3_Evaluacion_Seguridad.pdf
+│   ├── actividad3_codigo_vulnerable.md
 │   ├── justificacion_herramientas.md
 │   ├── modificaciones_app_insegura.md
 │   └── resultados_herramientas.md
 ├── evidencias/
 │   ├── README.md
+│   ├── actividad3-codigo-vulnerable/
+│   │   ├── backend_additem_inyeccion_logging.png
+│   │   ├── backend_index_cors_eval_errores.png
+│   │   ├── compose_privileged_mysql_expuesto.png
+│   │   └── dockerfile_version_vulnerable_copy_user.png
 │   ├── github_dependabot_alertas.png
 │   ├── github_secret_scanning_sin_alertas.png
 │   ├── nmap_puertos_mysql_abierto.png
@@ -198,4 +247,4 @@ El proyecto demuestra cómo una Web-App sencilla puede utilizarse para aplicar S
 
 La evaluación mostró que cada herramienta aporta una visión distinta: Snyk analiza código y configuraciones, Dependabot controla dependencias, Secret Scanning ayuda a prevenir fugas, Nmap valida la superficie de red y OWASP ZAP detecta fallos visibles solo cuando la aplicación está desplegada.
 
-La combinación de estas técnicas ofrece una visión más realista del desarrollo seguro, ya que ninguna herramienta cubre todo por sí sola.
+La combinación de estas técnicas ofrece una visión más realista del desarrollo seguro, ya que ninguna herramienta cubre todo por sí sola. Además, la carpeta `actividad3-codigo-vulnerable/` permite dejar trazabilidad del código inseguro utilizado para provocar alertas y justificar las evidencias incluidas en el repositorio.

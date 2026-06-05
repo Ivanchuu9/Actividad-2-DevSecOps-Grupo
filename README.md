@@ -182,7 +182,7 @@ Esta carpeta contiene una versión aislada y documentada de los cambios inseguro
 Las capturas concretas de este código vulnerable se encuentran en:
 
 ```text
-evidencias/actividad3-codigo-vulnerable/
+evidencias/
 ```
 
 Esta carpeta no sustituye a la aplicación principal del repositorio. Su finalidad es dejar documentado el escenario inseguro usado para la evaluación automática de seguridad.
@@ -204,18 +204,15 @@ Actividad-2-DevSecOps-Grupo/
 ├── assets/
 │   └── esquema-sdlc-devsecops.png
 ├── actividad3-codigo-vulnerable/
-│   ├── README.md
 │   ├── Dockerfile
 │   ├── compose.yaml
-│   ├── backend/
-│   │   └── src/
-│   │       ├── index.js
-│   │       ├── routes/
-│   │       │   └── addItem.js
-│   │       └── persistence/
-│   │           └── mysql.js
-│   └── client/
-│       └── README.md
+│   └── backend/
+│       └── src/
+│           ├── index.js
+│           ├── routes/
+│           │   └── addItem.js
+│           └── persistence/
+│               └── mysql.js
 ├── docs/
 │   ├── Asensio_Gonzalez_Jimenez_Martin_Actividad3_Evaluacion_Seguridad.pdf
 │   ├── actividad3_codigo_vulnerable.md
@@ -223,15 +220,14 @@ Actividad-2-DevSecOps-Grupo/
 │   ├── modificaciones_app_insegura.md
 │   └── resultados_herramientas.md
 ├── evidencias/
-│   ├── README.md
-│   ├── actividad3-codigo-vulnerable/
-│   │   ├── backend_additem_inyeccion_logging.png
-│   │   ├── backend_index_cors_eval_errores.png
-│   │   ├── compose_privileged_mysql_expuesto.png
-│   │   └── dockerfile_version_vulnerable_copy_user.png
+│   ├── backend_additem_inyeccion_logging.png
+│   ├── backend_index_cors_eval_errores.png
+│   ├── compose_privileged_mysql_expuesto.png
+│   ├── dockerfile_version_vulnerable_copy_user.png
 │   ├── github_dependabot_alertas.png
 │   ├── github_secret_scanning_sin_alertas.png
 │   ├── nmap_puertos_mysql_abierto.png
+│   ├── nodejs_20_1_0_referencia_cve.png
 │   ├── owasp_zap_alertas_dast.png
 │   └── snyk_resultados_criticas_altas.png
 └── tests/
